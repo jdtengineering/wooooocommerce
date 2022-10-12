@@ -1,8 +1,21 @@
 from woocommerce import API
 import json
 from dateutil import parser
+import os
 ds = '2012-03-01T10:00:00Z' # or any date sting of differing formats.
 date = parser.parse(ds)
+from playsound import playsound
+SOUND_FILENAME = 'sound.wav'
+
+# change working directory to this folder
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# check if sound.wav exists
+try:
+    open(SOUND_FILENAME, 'r')
+except IOError:
+    print('Audio file not found')
+    sound = None
 
 # get secret keys from file
 with open('keys.json') as f:
@@ -32,6 +45,8 @@ with open('last_order.txt', 'r') as f:
     try:
         if parser.parse(prev_last_order_str) < latest_order_time:
             print('new order!!!')
+            if sound:
+                playsound(SOUND_FILENAME)
             # write new last order
             with open('last_order.txt', 'w') as f:
                 f.write(latest_order_str)
