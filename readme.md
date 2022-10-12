@@ -13,7 +13,7 @@ Create a webhook in woocommerce and add you consumer key and secret to a file ca
 
 Everytime the script run, it fetches the date of the last order. If that date is newer than the previous last date, it must be a new order!
 
-Currently, the script does not check if the order was actually succesful.
+Currently, the script does not check if the order was actually succesfull.
 
 ### Installation
 ```virtualenv venv
