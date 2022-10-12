@@ -7,6 +7,7 @@ date = parser.parse(ds)
 from playsound import playsound
 SOUND_FILENAME = 'sound.wav'
 
+
 # change working directory to this folder
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +21,12 @@ except IOError:
 # get secret keys from file
 with open('keys.json') as f:
     keys = json.load(f)
+    url = keys['url']
     consumer_key = keys['consumer_key']
     consumer_secret = keys['consumer_secret']
-    # url = keys['url']
 
 wcapi = API(
-    url="https://howler-audio.com",
+    url=url,
     consumer_key=consumer_key,
     consumer_secret=consumer_secret,
     version="wc/v3"
