@@ -1,0 +1,1 @@
+Play a sound everytime someone bought something on your Woocommerce shop, woooooo!
