@@ -20,12 +20,15 @@ pip install -r requirements
 
 ### Configuring Woocommerce
 Go to Woocommerce settings > Advanced
+
 ![add rest api key](https://user-images.githubusercontent.com/8831830/195899920-6fb44ec7-3c8c-4489-b13c-eafc6985be13.png)
 
  Create new keys
+ 
 ![key details](https://user-images.githubusercontent.com/8831830/195899932-f1840d55-948b-4bca-b849-679b9c708f8a.png)
 
 Copy these keys to `keys.json`. Don't share these with anyone else!
+
 ![new details](https://user-images.githubusercontent.com/8831830/195899945-92a6b997-8f0d-4c9f-be49-fdff5979d959.png)
 
 ### Using
