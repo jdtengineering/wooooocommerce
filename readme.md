@@ -44,6 +44,7 @@ Make sure to put your webhook keys and website url in `keys.json`:
 }
 ```
 
+Then run the script by:
 ```
 venv\Scripts\activate
 python wooooocommerce.py
