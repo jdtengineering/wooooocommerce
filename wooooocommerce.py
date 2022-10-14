@@ -12,6 +12,7 @@ sound = None
 # change working directory to this folder
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+
 # check if sound.wav exists
 try:
     open(SOUND_FILENAME, 'r')
@@ -26,6 +27,9 @@ with open('keys.json') as f:
     url = keys['url']
     consumer_key = keys['consumer_key']
     consumer_secret = keys['consumer_secret']
+
+print('Started, checking for new orders...')
+
 
 while True:
     wcapi = API(
@@ -54,9 +58,9 @@ while True:
                 # write new last order
                 with open('last_order.txt', 'w') as f:
                     f.write(latest_order_str)
-            else:
-                print('no new order....')
-                print('yet!')
+            # else:
+            #     print('no new order....')
+            #     print('yet!')
         except ValueError:
             print('no previous order found')
 
