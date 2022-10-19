@@ -32,36 +32,39 @@ print('Started, checking for new orders...')
 
 
 while True:
-    wcapi = API(
-        url=url,
-        consumer_key=consumer_key,
-        consumer_secret=consumer_secret,
-        version="wc/v3"
-    )
+    try:
+        wcapi = API(
+            url=url,
+            consumer_key=consumer_key,
+            consumer_secret=consumer_secret,
+            version="wc/v3"
+        )
 
-    # create file if it doesn't exist
-    with open('last_order.txt', 'a+') as f:
-        pass
+        # create file if it doesn't exist
+        with open('last_order.txt', 'a+') as f:
+            pass
 
-    latest_order = wcapi.get('orders').json()[0]
-    latest_order_str = latest_order['date_created']
-    latest_order_time = parser.parse(latest_order['date_created'])
+        latest_order = wcapi.get('orders').json()[0]
+        latest_order_str = latest_order['date_created']
+        latest_order_time = parser.parse(latest_order['date_created'])
 
-    # read previous last order
-    with open('last_order.txt', 'r') as f:
-        prev_last_order_str = f.read()
-        try:
-            if parser.parse(prev_last_order_str) < latest_order_time:
-                print('new order!!!')
-                if sound:
-                    playsound(SOUND_FILENAME)
-                # write new last order
-                with open('last_order.txt', 'w') as f:
-                    f.write(latest_order_str)
-            # else:
-            #     print('no new order....')
-            #     print('yet!')
-        except ValueError:
-            print('no previous order found')
-
+        # read previous last order
+        with open('last_order.txt', 'r') as f:
+            prev_last_order_str = f.read()
+            try:
+                if parser.parse(prev_last_order_str) < latest_order_time:
+                    print('new order!!!')
+                    if sound:
+                        playsound(SOUND_FILENAME)
+                    # write new last order
+                    with open('last_order.txt', 'w') as f:
+                        f.write(latest_order_str)
+                # else:
+                #     print('no new order....')
+                #     print('yet!')
+            except ValueError as e:
+                print('no previous order found')
+    except Exception as e:
+        print(e)
+        print('error, trying again in 5 seconds...')
     sleep(5)
