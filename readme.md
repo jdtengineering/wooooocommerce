@@ -49,3 +49,11 @@ Then run the script by:
 venv\Scripts\activate
 python wooooocommerce.py
 ```
+
+### How to install as service on Ubuntu Linux
+Copy `wooooocommerce.service` to `/etc/systemd/system/`
+Edit the file and replace USERNAME with your Linux username
+```
+sudo systemd daemon-reload
+sudo systemctl start wooooocommerce.service
+``` 

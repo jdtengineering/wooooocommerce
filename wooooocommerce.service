@@ -1,0 +1,12 @@
+[Unit]
+Description=Wooooocommerce
+
+[Service]
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+Environment="PULSE_RUNTIME_PATH=/run/user/1000/pulse/"
+ExecStart=/usr/bin/python3 /home/USERNAME/wooooocommerce/wooooocommerce.py
+User=USERNAME
+Group=audio
+
+[Install]
+WantedBy=multi-user.target
