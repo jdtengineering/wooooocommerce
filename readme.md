@@ -1,6 +1,6 @@
 # wooooocommerce
 
-Play a sound everytime someone bought something on your Woocommerce shop, woooooo!
+Play a sound everytime someone bought something on your Woocommerce shop, woooooo! (That's 5 o's)
 
 How to use:
 Create a webhook in woocommerce and add you consumer key and secret to a file called `keys.json`. Also add your website's url to the file. For example:
@@ -53,6 +53,7 @@ python wooooocommerce.py
 ### How to install as service on Ubuntu Linux
 Copy `wooooocommerce.service` to `/etc/systemd/system/`
 Edit the file and replace USERNAME with your Linux username
+Type this into your terminal to enable the systemd service
 ```
 sudo systemd daemon-reload
 sudo systemctl start wooooocommerce.service
