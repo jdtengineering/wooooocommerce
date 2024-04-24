@@ -5,9 +5,7 @@ Play a sound everytime someone bought something on your Woocommerce shop, wooooo
 How to use:
 Create a webhook in woocommerce and add you consumer key and secret to a file called `keys.json`. Also add your website's url to the file. For example:
 
-Everytime the script run, it fetches the date of the last order. If that date is newer than the previous last date, it must be a new order!
-
-*Note: Currently, the script does not check if the order was actually succesfull. This could be implemented easily by checking the order status field in the json response.*
+Everytime the script run, it fetches the date of the last order that has status "processing". If that date is newer than the previous last date, it must be a new order!
 
 ### Requirements
 - Python 3
