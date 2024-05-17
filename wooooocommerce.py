@@ -3,6 +3,7 @@ from woocommerce import API
 import json
 from dateutil import parser
 import os
+from datetime import datetime
 
 ds = "2012-03-01T10:00:00Z"  # or any date sting of differing formats.
 date = parser.parse(ds)
@@ -10,6 +11,11 @@ from playsound import playsound
 
 SOUND_FILENAME = "sound.wav"
 sound = None
+
+# sound settings
+# 24 hour notation
+no_sound_before = 11
+no_sound_after = 18
 
 # change working directory to this folder
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -59,7 +65,7 @@ while True:
                     and latest_order['status'] == "processing"
                 ):
                     print("new order!!!")
-                    if sound:
+                    if sound and no_sound_before < datetime.now().hour < no_sound_after:
                         playsound(SOUND_FILENAME)
                     # write new last order
                     with open("last_order.txt", "w") as f:
