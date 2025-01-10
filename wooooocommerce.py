@@ -101,7 +101,6 @@ while True:
                 ):
                     print("new order!!!")
                     specialorder = float(latest_order['total']) - float(latest_order['shipping_total']) > magic_value
-                    specialorder = True
                     if sound and no_sound_before <= datetime.now().hour < no_sound_after:
                         if fastshipping and fastsound:
                             if specialorder and fastspecialsound:
