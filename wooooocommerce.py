@@ -12,8 +12,12 @@ from playsound import playsound
 
 SOUND_FILENAME = "sound.wav"
 SPECIAL_SOUND_FILENAME = "special_sound.wav"
+FAST_SHIPPING_FILENAME = "fast_sound.wav"
+FAST_SPECIAL_SHIPPING_FILENAME = "fast_special_sound.wav"
 sound = None
 specialsound = None
+fastsound = None
+fastspecialsound = None
 
 # sound settings
 # 24 hour notation
@@ -44,6 +48,20 @@ except IOError:
     print("Special audio file not found")
     specialsound = None
 
+try:
+    open(FAST_SHIPPING_FILENAME, "r")
+    fastsound = True
+except IOError:
+    print("Fast shipping audio file not found")
+    fastsound = None
+
+try:
+    open(FAST_SPECIAL_SHIPPING_FILENAME, "r")
+    fastspecialsound = True
+except IOError:
+    print("Fast special shipping audio file not found")
+    fastspecialsound = None
+
 # get secret keys from file
 with open("keys.json") as f:
     keys = json.load(f)
@@ -70,6 +88,8 @@ while True:
         latest_order = wcapi.get("orders").json()[0]
         latest_order_str = latest_order["date_created"]
         latest_order_time = parser.parse(latest_order["date_created"])
+        shipping_method = latest_order["shipping_lines"][0]["method_title"]
+        fastshipping = not "free" in shipping_method.lower()
 
         # read previous last order
         with open("last_order.txt", "r") as f:
@@ -80,8 +100,15 @@ while True:
                     and latest_order['status'] == "processing"
                 ):
                     print("new order!!!")
-                    if sound and no_sound_before < datetime.now().hour < no_sound_after:
-                        if float(latest_order['total']) - float(latest_order['shipping_total']) > magic_value and specialsound:
+                    specialorder = float(latest_order['total']) - float(latest_order['shipping_total']) > magic_value
+                    specialorder = True
+                    if sound and no_sound_before <= datetime.now().hour < no_sound_after:
+                        if fastshipping and fastsound:
+                            if specialorder and fastspecialsound:
+                                playsound(FAST_SPECIAL_SHIPPING_FILENAME)
+                            else:
+                                playsound(FAST_SHIPPING_FILENAME)
+                        elif specialorder and specialsound:
                             playsound(SPECIAL_SOUND_FILENAME)
                         else:
                             playsound(SOUND_FILENAME)
