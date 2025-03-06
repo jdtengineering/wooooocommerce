@@ -118,7 +118,9 @@ while True:
                 #     print('no new order....')
                 #     print('yet!')
             except ValueError as e:
-                print("no previous order found")
+                print("no valid previous order found")
+                with open("last_order.txt", "w") as f:
+                    f.write(latest_order_str)
     except Exception as e:
         print(e)
         print("error, trying again in 5 seconds...")
